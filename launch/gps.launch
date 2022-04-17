@@ -1,0 +1,13 @@
+<launch>
+  <!-- this launches the gps node to get data from the receiver and publish "/fix" and "/time_reference" topics -->
+  <node pkg="nmea_navsat_driver" type="nmea_serial_driver" name="gps_receiver_node">
+    <param name="port" value="/dev/ttyACM1"/>
+    <param name="baud" value="9600"/>
+    <param name="frame_id" value="gps_link"/>
+
+    <remap from="fix" to="gps/raw" />
+    <remap from="vel" to="gps/vel" />
+    <remap from="time_reference" to="gps/time_reference" />
+  </node>
+  <node pkg="ros_robot" type="gps_tf_fix.py" name="gps_tf_fix"/>
+</launch>
