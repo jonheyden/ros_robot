@@ -177,7 +177,7 @@ bool on_timer(void *) {
   if(lastCommandTime++ >= 11) {
     leftCmd=rightCmd=0;
   }
-
+/*
   setpoint_right = rightCmd/10;
   setpoint_left = leftCmd/10;  
 
@@ -191,25 +191,24 @@ bool on_timer(void *) {
   leftDrive = limit(leftErr*Kp + leftInt,DRIVE_LIMIT,-DRIVE_LIMIT);
   rightInt = limit(rightInt + rightErr*Ki, INTEGRAL_LIMIT,-INTEGRAL_LIMIT);
   rightDrive = limit(rightErr*Kp + rightInt,DRIVE_LIMIT,-DRIVE_LIMIT);
+*/
 
-  leftDrive=leftCmd;
-  rightDrive=rightCmd;
- if (leftDrive != 0){
-	if (leftDrive > 0 && leftDrive < 30) {
-		leftDrive += 30;
-	} else if (leftDrive < 0 && leftDrive > -30){
-		leftDrive -= 30;	
-	}
+  if (leftCmd != 0) {
+     leftDrive=(leftCmd * 3.75) + 28.33;
+  } else {
+     leftDrive = 0;
   }
-  if (rightDrive != 0){
-	if (rightDrive > 0 && rightDrive < 30) {
-		rightDrive += 30;
-	} else if (rightDrive < 0 && rightDrive > -30){
-		rightDrive -= 30;	
-	}
+  
+  if (rightCmd != 0) {
+     rightDrive=(rightCmd * 3.75) + 28.33;
+  } else {
+     rightDrive=0;
   }
+  
+
   leftDrive = limit(leftDrive,127,-127);
   rightDrive = limit(rightDrive,127,-127);
+
   ST.motor(2, -leftDrive);
   ST.motor(1, rightDrive);
   /* Get a new sensor event */
@@ -236,10 +235,6 @@ bool on_timer(void *) {
   Serial.print(acc.acceleration.y);
   Serial.print(",");
   Serial.print(acc.acceleration.z);
-  Serial.print(",");
-  Serial.print(setpoint_left);
-  Serial.print(",");
-  Serial.print(setpoint_right);
   Serial.print(",");
   Serial.print((int)leftCmd);
   Serial.print(",");
