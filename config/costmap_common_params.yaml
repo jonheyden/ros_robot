@@ -1,19 +1,19 @@
-global_frame: map
+global_frame: odom
 robot_base_frame: base_link
-update_frequency: 5.0
+update_frequency: 1.0
 publish_frequency: 1.0
 
 #set if you want the voxel map published
 publish_voxel_map: true
 
 #set to true if you want to initialize the costmap from a static map
-static_map: false
+static_map: true
 
 #begin - COMMENT these lines if you set static_map to true
-rolling_window: true
-width: 6.0
-height: 6.0
-resolution: 0.025
+#rolling_window: true
+#width: 6.0
+#height: 6.0
+#resolution: 0.025
 #end - COMMENT these lines if you set static_map to true
 
 #START VOXEL STUFF
@@ -25,11 +25,11 @@ unknown_threshold: 10
 mark_threshold: 0
 #END VOXEL STUFF
 
-transform_tolerance: 0.3
-obstacle_range: 2.5
+transform_tolerance: 2
+obstacle_range: 2
 max_obstacle_height: 2.0
 raytrace_range: 3.0
-footprint: [[-0.325, -0.325], [-0.325, 0.325], [0.325, 0.325], [0.46, 0.0], [0.325, -0.325]]
+footprint: [[-0.1625, -0.1625], [-0.1625, 0.1625], [0.1625, 0.1625], [0.23, 0.0], [0.1625, -0.1625]]
 #robot_radius: 0.46
 footprint_padding: 0.01
 inflation_radius: 0.55

@@ -194,13 +194,21 @@ bool on_timer(void *) {
 */
 
   if (leftCmd != 0) {
-     leftDrive=(leftCmd * 3.75) + 28.33;
+     if (leftCmd > 0){
+        leftDrive=(leftCmd * 3.75) + 28.33;
+     } else {
+        leftDrive=(leftCmd * 3.75) - 28.33;
+     }
   } else {
      leftDrive = 0;
   }
   
   if (rightCmd != 0) {
-     rightDrive=(rightCmd * 3.75) + 28.33;
+     if (rightCmd > 0) {
+        rightDrive=(rightCmd * 3.75) + 28.33;
+     } else {
+        rightDrive=(rightCmd * 3.75) - 28.33;
+     }
   } else {
      rightDrive=0;
   }

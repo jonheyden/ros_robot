@@ -1,4 +1,10 @@
 <launch>
+
+
+<!-- map to odom
+takes in amcl and other global pose estimates
+hector mapping, navsat, gps publishes tf-->
+
 <node pkg="robot_localization" type="ekf_localization_node"
       name="robot_localization_ekf_node_odom"
       clear_params="true">
@@ -9,17 +15,17 @@
   <param name="map_frame" value="map" />
   <param name="odom_frame" value="odom" />
   <param name="base_link_frame" value="base_link" />
-  <param name="world_frame" value="odom" />
-  <param name="twist0" value="/vel" />
+  <param name="world_frame" value="map" />
+  <!-- <param name="twist0" value="/vel" /> -->
   <!-- <param name="imu0" value="/imu" /> -->
-  <remap from="odometry/filtered" to="odometry/filtered/local" />
-  <param name="twist0_differential" value="false"/>
+  <remap from="odometry/filtered" to="odometry/filtered_map" />
+  <!-- <param name="twist0_differential" value="false"/>
   <rosparam param="twist0_config">[false, false, false, 
                                    false, false, false, 
                                    true, false, false, 
                                    false, false, true, 
                                    false, false, false]
-  </rosparam>
+  </rosparam> -->
 
   <!-- <rosparam param="imu0_config">[false, false, false,
                                  false, false, true,
@@ -29,16 +35,30 @@
   </rosparam>
   <param name="imu0_differential" value="false"/>
   <param name="imu0_relative" value="false"/> -->
+  <param name="pose0" value="/amcl_pose" />
+  <rosparam param="pose0_config">[true,  true,  false,
+                                false, false, false,
+                                false, false, false,
+                                false, false, false,
+                                false, false, false]</rosparam>
+  <param name="pose0_differential" value="false"/>
 
-  <param name="odom0" value="/scanmatch_odom" />
+  <param name="odom0" value="/odometry/gps" />
   <rosparam param="odom0_config">[true,  true,  false,
-                                false, false, true,
+                                false, false, false,
                                 false, false, false,
                                 false, false, false,
                                 false, false, false]</rosparam>
   <param name="odom0_differential" value="false"/>
 
+
 </node>
+
+
+<!-- odom to baselink
+takes in encoders, imu, laser scan, etc
+publishes odom -->
+
 
 <node pkg="robot_localization" type="ekf_localization_node"
       name="robot_localization_ekf_node_gps"
@@ -50,8 +70,8 @@
   <param name="map_frame" value="map" />
   <param name="odom_frame" value="odom" />
   <param name="base_link_frame" value="base_link" />
-  <param name="world_frame" value="map" />
-  <remap from="odometry/filtered" to="odometry/filtered/global" />
+  <param name="world_frame" value="odom" />
+  <remap from="odometry/filtered" to="odometry/filtered_odom" />
   <param name="twist0" value="/vel" />
   <param name="twist0_differential" value="false"/>
   <rosparam param="twist0_config">[false, false, false, 
@@ -71,13 +91,17 @@
   <param name="imu0_differential" value="false"/>
   <param name="imu0_relative" value="false"/>
 
-  <param name="odom0" value="/odometry/gps" />
+  <param name="odom0" value="/scanmatch_odom" />
   <rosparam param="odom0_config">[true,  true,  false,
-                                false, false, false,
+                                false, false, true,
                                 false, false, false,
                                 false, false, false,
                                 false, false, false]</rosparam>
   <param name="odom0_differential" value="false"/>
+
+
+
+
 
 
 </node>
@@ -87,7 +111,10 @@
     <param name="yaw_offset" value="0"/>
     <rosparam param="datum">[41.2230, 111.9738, 0.0, map, base_link]</rosparam>
     <remap from="/imu/data" to="/imu" />
-    <remap from="/odometry/filtered" to="/odometry/filtered/global" />
+    <remap from="/gps/fix" to="/odometry/gps" />
+    <remap from="/odometry/filtered" to="/odometry/filtered_map" />
+    <param name="broadcast_utm_transform" value="true"/>
+    <param name="publish_filtered_gps" value="true"/>
   </node>
 
 </launch>

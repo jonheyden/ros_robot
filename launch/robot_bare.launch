@@ -9,15 +9,21 @@
 
   </node>
 -->
+
   <include file="$(find ros_robot)/launch/tf.launch" />
   <include file="$(find ros_robot)/launch/arduino.launch" />
-  <include file="$(find ros_robot)/launch/localization.launch" />
+
+  <!-- <include file="$(find ros_robot)/launch/localization_no_gps.launch" /> -->
   <include file="$(find ros_robot)/launch/gps.launch" />
-  <include file="$(find ros_robot)/launch/jetson_csi_cam.launch" />
+  <!-- <include file="$(find ros_robot)/launch/jetson_csi_cam.launch" /> -->
+  
   <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+
   <include file="$(find ros_robot)/launch/hector.launch" />
+
   <include file="$(find ros_robot)/launch/amcl_diff.launch" />
   
+  <include file="$(find ros_robot)/launch/localization_copy.launch" />
   <!-- <include file="$(find ros_robot)/launch/costmap.launch" /> -->
 
 </launch>

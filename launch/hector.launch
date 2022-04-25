@@ -6,7 +6,7 @@
 
   <param name="/use_sim_time" value="false"/>
 
-  <include file="$(find hector_mapping)/launch/mapping_default.launch"/>
+  <include file="$(find ros_robot)/launch/mapping_default.launch"/>
 
   <node pkg="hector_map_server" type="hector_map_server" name="hector_map_server" output="screen" />
   
