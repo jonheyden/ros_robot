@@ -21,6 +21,8 @@
   <node pkg="tf2_ros" type="static_transform_publisher" name="gps_broadcaster" 
 	args="0 0.1 0.1 0 0 0 base_link gps_link" />
 
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_laser_broadcaster" args="0 0 0.5 -3.14 0 0 base_link laser"/>
+  
   <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="arm_base_broadcaster" 
 	args="-0.1 0 0.08 3.141 0 0 base_link px100/base_link" /> -->
 
@@ -34,21 +36,24 @@
   -->
   <!-- odom to base should be replaced with odometry from encoders -->
   
-  <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_broadcaster" 
-	args="0 0 0 0 0 0 odom base_link" />
+
  
   <!-- map to odom comes from visual landmarks -->
-  <node pkg="tf2_ros" type="static_transform_publisher" name="odom_link_broadcaster" 
-	args="0 0 0 0 0 0 map odom" />
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="odom_link_broadcaster" 
+	args="0 0 0 0 0 0 map odom" /> -->
   <!-- map to world comes from gps -->
+  
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_broadcaster" 
+	args="0 0 0 0 0 0 odom base_link" /> -->
+
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 map odom"/>  -->
+
   <node pkg="tf2_ros" type="static_transform_publisher" name="map_link_broadcaster" 
 	args="0 0 0 0 0 0 world map" />
-   
-  <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_laser_broadcaster" args="0 0 0.5 -3.14 0 0 base_link laser"/>
 
   <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="map_scanmatcher_broadcaster" args="0 0 0 0 0 0 map scanmatcher_frame"/> -->
 
-  <node pkg="tf2_ros" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 map odom"/> 
+
 
   <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="map_nav_broadcaster" args="0 0 0 0 0 0 map nav 20"/> -->
 

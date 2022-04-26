@@ -5,37 +5,22 @@
 takes in amcl and other global pose estimates
 hector mapping, navsat, gps publishes tf-->
 
-<node pkg="robot_localization" type="ekf_localization_node"
+
+<!-- <node pkg="robot_localization" type="ekf_localization_node"
       name="robot_localization_ekf_node_odom"
       clear_params="true">
   <param name="frequency" value="10." />
   <param name="sensor_timeout" value="0.2" />
+  <param name="transform_time_offset" value="0.1" />
   <param name="two_d_mode" value="true" />
   <param name="publish_tf" value="true" />
   <param name="map_frame" value="map" />
   <param name="odom_frame" value="odom" />
   <param name="base_link_frame" value="base_link" />
   <param name="world_frame" value="map" />
-  <!-- <param name="twist0" value="/vel" /> -->
-  <!-- <param name="imu0" value="/imu" /> -->
   <remap from="odometry/filtered" to="odometry/filtered_map" />
-  <!-- <param name="twist0_differential" value="false"/>
-  <rosparam param="twist0_config">[false, false, false, 
-                                   false, false, false, 
-                                   true, false, false, 
-                                   false, false, true, 
-                                   false, false, false]
-  </rosparam> -->
 
-  <!-- <rosparam param="imu0_config">[false, false, false,
-                                 false, false, true,
-                                 false, false, false,
-                                 false, false, false,
-                                 false, false, false]
-  </rosparam>
-  <param name="imu0_differential" value="false"/>
-  <param name="imu0_relative" value="false"/> -->
-  <param name="pose0" value="/amcl_pose" />
+  <param name="pose0" value="/poseupdate" />
   <rosparam param="pose0_config">[true,  true,  false,
                                 false, false, false,
                                 false, false, false,
@@ -51,8 +36,26 @@ hector mapping, navsat, gps publishes tf-->
                                 false, false, false]</rosparam>
   <param name="odom0_differential" value="false"/>
 
+  <param name="twist0" value="/vel" />
+  <param name="imu0" value="/imu" />
+  <param name="twist0_differential" value="false"/>
+  <rosparam param="twist0_config">[false, false, false, 
+                                   false, false, false, 
+                                   true, false, false, 
+                                   false, false, true, 
+                                   false, false, false]
+  </rosparam>
 
-</node>
+  <rosparam param="imu0_config">[false, false, false,
+                                 false, false, true,
+                                 false, false, false,
+                                 false, false, false,
+                                 false, false, false]
+  </rosparam>
+  <param name="imu0_differential" value="false"/>
+  <param name="imu0_relative" value="false"/>
+
+</node> -->
 
 
 <!-- odom to baselink
@@ -65,6 +68,7 @@ publishes odom -->
       clear_params="true">
   <param name="frequency" value="10." />
   <param name="sensor_timeout" value="0.2" />
+  <param name="transform_time_offset" value="0.1" />
   <param name="two_d_mode" value="true" />
   <param name="publish_tf" value="true" />
   <param name="map_frame" value="map" />
@@ -99,13 +103,10 @@ publishes odom -->
                                 false, false, false]</rosparam>
   <param name="odom0_differential" value="false"/>
 
-
-
-
-
-
 </node>
 
+
+<!-- 
   <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true">
     <param name="magnetic_declination_radians" value="0"/>
     <param name="yaw_offset" value="0"/>
@@ -113,8 +114,7 @@ publishes odom -->
     <remap from="/imu/data" to="/imu" />
     <remap from="/gps/fix" to="/odometry/gps" />
     <remap from="/odometry/filtered" to="/odometry/filtered_map" />
-    <param name="broadcast_utm_transform" value="true"/>
     <param name="publish_filtered_gps" value="true"/>
-  </node>
+  </node> -->
 
-</launch>
+</launch> 

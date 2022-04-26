@@ -14,6 +14,7 @@ def callback(data, args):
 	bc.sendTransform(t)
 
 if __name__ == "__main__":
+   
 	rospy.init_node("odomtransformer")
 	odomInput = rospy.get_param("~odom_input")
 	tfOutput  = rospy.get_param("~tf_output")
