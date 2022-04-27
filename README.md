@@ -21,7 +21,7 @@ There are many editor choices, below are two options:
 2. [VSCode through SSH](https://code.visualstudio.com/docs/remote/ssh)
 
 
-### How to Use
+## How to Use
 1. Once above steps are done, clone this repository
 2. Drill to the robotedit2 folder
    1. Compile file ```arduino-cli -b arduino:avr:uno robotedit2.ino```
