@@ -1,17 +1,7 @@
 <launch>
-<!--
-  <include file="$(find ros_robot)/launch/usb_cam.launch" />
-  
-  <include file="$(find ros_robot)/launch/continuous_detection.launch" />
-  <include file="$(find ros_robot)/launch/arm_no_rviz.launch" />
-  <include file="$(find hector_slam)/hector_mapping/launch/mapping_default.launch" />
-  <node pkg="amcl" type="amcl" name="amcl">
 
-  </node>
--->
 
    <!-- Sets static transforms -->
-
   <include file="$(find ros_robot)/launch/tf.launch" />
 
   <!-- Controls the wheels and provides encoder feedback  -->
@@ -22,20 +12,13 @@
   <!-- <include file="$(find ros_robot)/launch/localization.launch" /> -->
   <include file="$(find ros_robot)/launch/localization_copy.launch" />
   <include file="$(find ros_robot)/launch/gps.launch" />
-
   <!-- <include file="$(find ros_robot)/launch/jetson_csi_cam.launch" /> -->
   
   <!-- Launches lidar node and hector slam files -->
   <include file="$(find rplidar_ros)/launch/rplidar.launch" />
   <include file="$(find ros_robot)/launch/hector.launch" />
 
-
-
   <node name="odomnode" pkg="ros_robot" type="odompub.py" output="screen" >
   </node>
-
-  <!-- <include file="$(find ros_robot)/launch/amcl_diff.launch" /> -->
-
-  <!-- <include file="$(find ros_robot)/launch/costmap.launch" /> -->
 
 </launch>
