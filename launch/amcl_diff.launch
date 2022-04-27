@@ -14,7 +14,7 @@
   <param name="kld_z" value="0.99"/>
   <param name="odom_alpha1" value="0.2"/>
   <param name="odom_alpha2" value="0.2"/>
-  <param name="use_map_topic" value="false"/>
+  <param name="use_map_topic" value="true"/>
   <param name="initial_pose_x" value='0.0'/>
   <param name="initial_pose_y" value='0.0'/>
   <param name="initial_pose_a" value='0.0'/>

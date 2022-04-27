@@ -2,8 +2,8 @@
 base_global_planner: global_planner/GlobalPlanner
 #base_global_planner: carrot_planner/CarrotPlanner
 
-base_local_planner: dwa_local_planner/DWAPlannerROS
-#base_local_planner: base_local_planner/TrajectoryPlannerROS
+#base_local_planner: dwa_local_planner/DWAPlannerROS
+base_local_planner: base_local_planner/TrajectoryPlannerROS
 #base_local_planner: teb_local_planner/TebLocalPlannerROS
 
 recovery_behavior_enabled: false
@@ -26,29 +26,29 @@ oscillation_distance: 0.2
 
 TrajectoryPlannerROS:
   #Set the acceleration limits of the robot
-  acc_lim_th: 0.7
-  acc_lim_x: 0.5
+  acc_lim_theta: 1.5
+  acc_lim_x: 1
   acc_lim_y: 0
 
   #Set the velocity limits of the robot
-  max_vel_x: 0.40
-  min_vel_x: 0.10
-  max_vel_theta: 0.5
-  min_vel_theta: -0.5
-  max_rotational_vel: 1.0
-  min_in_place_rotational_vel: 0.8
-  min_in_place_vel_theta: 0.8
+  max_vel_x: 2
+  min_vel_x: 0.5
+  max_vel_theta: 2
+  min_vel_theta: -2
+  max_rotational_vel: 2
+  min_in_place_rotational_vel: 2
+  min_in_place_vel_theta: 2
 
   #The velocity the robot will command when trying to escape from a stuck situation
-  escape_vel: -0.2
+  escape_vel: -0.3
 
   #For this example, we'll use a holonomic robot
   holonomic_robot: false
 
   #Set the tolerance on achieving a goal
-  xy_goal_tolerance: 0.1
-  yaw_goal_tolerance: 0.1
-  latch_xy_goal_tolerance: true
+  xy_goal_tolerance: 0.5
+  yaw_goal_tolerance: 0.3
+  latch_xy_goal_tolerance: false
 
   #We'll configure how long and with what granularity we'll forward simulate trajectories
   sim_time: 1.5
@@ -87,9 +87,9 @@ TrajectoryPlannerROS2:
   max_trans_vel: 0.2
   min_trans_vel: 0 
 
-  max_rotational_vel: 0.3
-  max_vel_theta: 0.3
-  min_vel_theta: -0.3
+  max_rotational_vel: 2
+  max_vel_theta: 2
+  min_vel_theta: -2
   min_in_place_vel_theta: 1
   escape_vel: 0
 
@@ -127,31 +127,31 @@ TrajectoryPlannerROS2:
 DWAPlannerROS:
 
 # Robot Configuration Parameters - Kobuki
-  max_vel_x: 0.7  # 0.55
+  max_vel_x: 1  # 0.55
   min_vel_x: -0.1 
 
   max_vel_y: 0.0  # diff drive robot
   min_vel_y: 0.0  # diff drive robot
 
-  max_trans_vel: 0.5 # choose slightly less than the base's capability
-  min_trans_vel: -0.1  # this is the min trans velocity when there is negligible rotational velocity
-  trans_stopped_vel: 0.1
+  max_vel_trans: 2 # choose slightly less than the base's capability
+  min_vel_trans: -2  # this is the min trans velocity when there is negligible rotational velocity
+  trans_stopped_vel: 0.2
 
   # Warning!
   #   do not set min_trans_vel to 0.0 otherwise dwa will always think translational velocities
   #   are non-negligible and small in place rotational velocities will be created.
 
-  max_rot_vel: 0.6  # choose slightly less than the base's capability
-  min_rot_vel: 0.4  # this is the min angular velocity when there is negligible translational velocity
-  rot_stopped_vel: 1
+  max_vel_theta: 2  # choose slightly less than the base's capability
+  min_vel_theta: 1  # this is the min angular velocity when there is negligible translational velocity
+  theta_stopped_vel: 1
   
-  acc_lim_x: 1.0 # maximum is theoretically 2.0, but we 
-  acc_lim_theta: 2.0
+  acc_lim_x: 1.5 # maximum is theoretically 2.0, but we 
+  acc_lim_theta: 1.5
   acc_lim_y: 0.0      # diff drive robot
 
 # Goal Tolerance Parameters
-  yaw_goal_tolerance: 0.3  # 0.05
-  xy_goal_tolerance: 0.15  # 0.10
+  yaw_goal_tolerance: 0.5  # 0.05
+  xy_goal_tolerance: 0.3  # 0.10
   latch_xy_goal_tolerance: false
 
 # Forward Simulation Parameters
@@ -169,7 +169,7 @@ DWAPlannerROS:
   forward_point_distance: 0.325 # 0.325  - how far along to place an additional scoring point
   stop_time_buffer: 0.2         # 0.2    - amount of time a robot must stop in before colliding for a valid traj.
   scaling_speed: 0.25           # 0.25   - absolute velocity at which to start scaling the robot's footprint
-  max_scaling_factor: 0.2       # 0.2    - how much to scale the robot's footprint when at speed.
+  max_scaling_factor: 0.1       # 0.2    - how much to scale the robot's footprint when at speed.
 
 # Oscillation Prevention Parameters
   oscillation_reset_dist: 0.05  # 0.05   - how far to travel before resetting oscillation flags
@@ -193,7 +193,7 @@ DWAPlannerROS:
 GlobalPlanner:                                  # Also see: http://wiki.ros.org/global_planner
   old_navfn_behavior: false                     # Exactly mirror behavior of navfn, use defaults for other boolean parameters, default false
   use_quadratic: true                           # Use the quadratic approximation of the potential. Otherwise, use a simpler calculation, default true
-  use_dijkstra: true                            # Use dijkstra's algorithm. Otherwise, A*, default true
+  use_dijkstra: false                            # Use dijkstra's algorithm. Otherwise, A*, default true
   use_grid_path: false                          # Create a path that follows the grid boundaries. Otherwise, use a gradient descent method, default false
   
   allow_unknown: true                           # Allow planner to plan through unknown space, default true
@@ -206,8 +206,8 @@ GlobalPlanner:                                  # Also see: http://wiki.ros.org/
   planner_costmap_publish_frequency: 0.0        # default 0.0
   
   lethal_cost: 253                              # default 253
-  neutral_cost: 50                              # default 50
-  cost_factor: 3.0                              # Factor to multiply each cost from costmap by, default 3.0
+  neutral_cost: 66                              # default 50
+  cost_factor: 0.4                              # Factor to multiply each cost from costmap by, default 3.0
   publish_potential: true                       # Publish Potential Costmap (this is not like the navfn pointcloud2 potential), default true
 
 
@@ -215,7 +215,7 @@ GlobalPlanner:                                  # Also see: http://wiki.ros.org/
 TebLocalPlannerROS:
 
  odom_topic: odom
- map_frame: /odom
+ map_frame: odom
     
  # Trajectory
   
@@ -228,9 +228,9 @@ TebLocalPlannerROS:
     
  # Robot
          
- max_vel_x: 0.4
+ max_vel_x: 1.5
  max_vel_x_backwards: 0.2
- max_vel_theta: 0.3
+ max_vel_theta: 2.5
  acc_lim_x: 0.5
  acc_lim_theta: 0.5
  min_turning_radius: 0.0

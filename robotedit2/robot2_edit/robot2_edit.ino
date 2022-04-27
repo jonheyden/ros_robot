@@ -193,11 +193,13 @@ bool on_timer(void *) {
   rightDrive = limit(rightErr*Kp + rightInt,DRIVE_LIMIT,-DRIVE_LIMIT);
 */
 
+
+
   if (leftCmd != 0) {
      if (leftCmd > 0){
-        leftDrive=(leftCmd * 3.75) + 28.33;
+        leftDrive=(leftCmd * 3.625) + 30.83;
      } else {
-        leftDrive=(leftCmd * 3.75) - 28.33;
+        leftDrive=(leftCmd * 3.625) - 30.83;
      }
   } else {
      leftDrive = 0;
@@ -205,9 +207,9 @@ bool on_timer(void *) {
   
   if (rightCmd != 0) {
      if (rightCmd > 0) {
-        rightDrive=(rightCmd * 3.75) + 28.33;
+        rightDrive=(rightCmd * 3.625) + 30.83;
      } else {
-        rightDrive=(rightCmd * 3.75) - 28.33;
+        rightDrive=(rightCmd * 3.625) - 30.83;
      }
   } else {
      rightDrive=0;
