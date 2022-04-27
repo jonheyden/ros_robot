@@ -6,9 +6,9 @@ This method diverges from the PID loop and instead uses linear regression to giv
 Three points were taken that related to the assumed tick speed of ```24 ticks = 1 m/s```
 
 This gave roughly the following:
-```24 ticks = 120 Commanded Speed```
-```12 ticks = 70 Commanded Speed```
-```1 tick = 33 Commanded Speed```
+- ```24 ticks = 120 Commanded Speed```
+- ```12 ticks = 70 Commanded Speed```
+- ```1 tick = 33 Commanded Speed```
 
 Putting these values into a linear regression algorithm gave the values used in the robotedit2.ino starting on line 161. 
 
