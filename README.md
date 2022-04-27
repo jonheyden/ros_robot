@@ -30,7 +30,7 @@ There are many editor choices, below are two options:
 4. ```Source devel/setup.bash```
 5. ```roslaunch ros_robot robot_bare.launch```
 6. Wait for the transforms, maps, etc to load and for the constant serial stream
-7. ```roslaunch ros_robot move_base.launch``
+7. ```roslaunch ros_robot move_base.launch```
 8. Open RVIZ and give the robot an initial 2D estimate
 9. Set a navigation goal and watch it go
 
